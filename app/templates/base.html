@@ -1,8 +1,13 @@
+<!-- This is the base template that all other templates for the web app
+     inherit from. The point of the base template is to give a consistent
+     UI across pages that have different functions.
+-->
+
 <html>
     <head>
         {% if title %}
         <title>
-            To-do list for {{user.username}}
+            To-do list for {{current_user.username}}
         </title>
         {% else %}
         <title>
@@ -11,11 +16,16 @@
         {% endif %}
     </head>
     <body>
-        <div>
+        <div id="navbar">
             O.
             <a href="{{ url_for('index')}}">Home</a>
+            {% if current_user.is_anonymous %}
             <a href="{{ url_for('login')}}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout')}}">Logout</a>
+            {% endif %}
         </div>
+
         <hr>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
