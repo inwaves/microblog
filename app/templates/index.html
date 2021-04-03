@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> To-do list for {{ user.username }}</h1>
+<form>
+{% for todo in todos %}
+<div><input type="checkbox" id={{todo.id}}><label for{{todo.id}}>{{ todo.title }}</label></div>
+{% endfor %}
+</form> 
+{% endblock %}
