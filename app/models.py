@@ -68,7 +68,11 @@ class User(UserMixin, db.Model):
 
         # Should display the user's own posts in the feed.
         own = Task.query.filter_by(user_id=self.id)
-        return followed.union(own).order_by(Task.timestamp)
+        return followed.union(own).order_by(Task.timestamp.desc())
+
+    def own_tasks(self):
+        own = Task.query.filter_by(user_id=self.id)
+        return own.order_by(Task.timestamp.desc())
 
     def __repr__(self) -> str:
         return f"<User {self.username}>"

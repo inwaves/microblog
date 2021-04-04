@@ -1,15 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> To-do list for {{ current_user.username }}</h1>
-<form>
-    {% for todo in todos %}
-    <div>
-        <input type="checkbox" id={{todo.id}}>
-        <label for{{todo.id}}>
-            {{ todo.title }}
-        </label>
-    </div>
+    <h1> To-do list for {{ current_user.username }}</h1>
+    {% for task in tasks %}
+        {% include "_task.html" %}
     {% endfor %}
-</form>
+    {% if prev_url %}
+        <a href="{{ prev_url }}">Newer tasks</a>
+    {% endif %}
+    {% if next_url %}
+        <a href="{{ next_url }}">Older tasks</a>
+    {% endif %}
+    <!-- This will include the form to create a task if on the index page.
+         The explore page does not have it. -->
+    {% if form %}
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.task.label }} <br>
+                {{ form.task(cols=32, rows=4) }} <br>
+                {% for error in form.task.errors %}
+                    <span style="color: red;"> [{{ error }}]</span>
+                {% endfor %}
+                {{ form.submit }}
+            </p>
+        </form>
+    {% endif %}
+
 {% endblock %}

@@ -1,32 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <table>
     <tr valign="top">
-        <td><img src="{{user.avatar(128)}}" </td> <td>
-            <h1>{{user.username}}</h1>
+        <td><img src="{{ user.avatar(128) }}" alt="avatar"></td>
+        <td>
+            <h1>{{ user.username }}</h1>
             {% if user.about_me %}
-            <p> {{user.about_me}}</p>
+                <p> {{ user.about_me }}</p>
             {% endif %}
 
             {% if user.last_seen %}
-            <p> Last seen on: {{user.last_seen}}</p>
+                <p> Last seen on: {{ user.last_seen }}</p>
             {% endif %}
 
-            <p>{{ user.followers.count() }} followers, {{ user.followed.count()}} following.</p>
+            <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
 
             <!-- if the user you're looking at is you... -->
             {% if user == current_user %}
-            <p><a href= "{{url_for('edit_profile')}}">Edit your profile</a></p>
-            {% elif not current_user.is_following(user)  %}
-               <p>
-                <form action="{{ url_for('follow', username=user.username }}" method="post">
+                <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+            {% elif not current_user.is_following(user) %}
+                <p>
+                <form action="{{ url_for('follow', username=user.username) }}" method="post">
                     {{ form.hidden_tag() }}
                     {{ form.submit(value="Follow") }}
                 </form>
-               </p>
-            {% else  %}
+                </p>
+            {% else %}
                 <p>
                 <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
                     {{ form.hidden_tag() }}
@@ -39,6 +39,11 @@
 </table>
 <hr>
 {% for task in tasks %}
-{% include "_task.html" %}
+    {% include "_task.html" %}
 {% endfor %}
+
+<a href="{{ prev_url }}">Newer posts</a>
+{% endif %}
+{% if next_url %}
+<a href="{{ next_url }}">Older posts</a>
 {% endblock %}

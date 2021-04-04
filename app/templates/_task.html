@@ -1,9 +1,11 @@
 <table>
     <tr valign="top">
+        <td><img src="{{ task.author.avatar(36) }}" alt="avatar"></td>
+        <td><a href="{{ url_for("user", username=task.author.username) }}">{{ task.author.username }}</a></td>
         {% if task.done %}
-        <td class="done">{{ task.body }}</td>
+            <td class="done">{{ task.body }}</td>
         {% else %}
-        <td class="active">{{ task.body }}</td>
+            <td class="active">{{ task.body }}</td>
         {% endif %}
     </tr>
 </table>

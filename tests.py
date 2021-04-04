@@ -54,6 +54,21 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u1.followed.count(), 0)
         self.assertEqual(u2.followers.count(), 0)
 
+    def test_own_tasks(self):
+        u1 = User(username="Andrei", email="andrei@example.com")
+        db.session.add(u1)
+
+        tasks = [
+            Task(body=f"task-{i}", author=u1, timestamp=datetime.utcnow())
+            for i in range(5)
+        ]
+        db.session.add_all(tasks)
+        db.session.commit()
+
+        self.assertEqual(u1.own_tasks().count(), len(tasks))
+        self.assertEqual(u1.own_tasks().first().body, "task-0")
+
+
     def test_follow_tasks(self):
         # Create four users.
         u1 = User(username='john', email='john@example.com')

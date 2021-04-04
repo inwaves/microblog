@@ -3,43 +3,44 @@
      UI across pages that have different functions.
 -->
 
-<html>
+<html lang="en">
 
 <head>
     {% if title %}
-    <title>
-        To-do list for {{current_user.username}}
-    </title>
+        <title>
+            To-do list for {{ current_user.username }}
+        </title>
     {% else %}
-    <title>
-        To-do list
-    </title>
+        <title>
+            To-do list
+        </title>
     {% endif %}
 </head>
 
 <body>
-    <div id="navbar">
-        O.
-        <a href="{{ url_for('index')}}">Home</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login')}}">Login</a>
-        {% else %}
-        <a href="{{ url_for('user', username=current_user.username)}}">{{current_user.username}}</a>
-        <a href="{{ url_for('logout')}}">Logout</a>
-        {% endif %}
-    </div>
-
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+<div id="navbar">
+    O.microtasks
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for("explore") }}">Explore</a>
+    {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+    {% else %}
+        <a href="{{ url_for('user', username=current_user.username) }}">{{ current_user.username }}</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
     {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
+</div>
+
+<hr>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
 </body>
 
 </html>

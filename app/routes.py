@@ -5,8 +5,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm
-from app.models import User
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, TaskForm, ResetPasswordRequestForm
+from app.models import User, Task
 
 
 @app.before_request
@@ -16,19 +16,47 @@ def before_request():
         db.session.commit()
 
 
-@app.route("/")
-@app.route("/index")
+@app.route("/", methods=["GET", "POST"])
+@app.route("/index", methods=["GET", "POST"])
 @login_required
 def index():
-    # TODO: this needs to take the tasks of the currently authenticated user
-    todos = [
-        {"id": 0, "title": "Make bed"},
-        {"id": 1, "title": "Open window"},
-        {"id": 2, "title": "Brew tea"},
-        {"id": 3, "title": "Feed cats"},
-    ]
+    form = TaskForm()
+    if form.validate_on_submit():
+        task = Task(body=form.task.data, author=current_user)
+        db.session.add(task)
+        db.session.commit()
+        flash("Task added!")
+        return redirect(url_for("index"))
 
-    return render_template("index.html", title="Home", todos=todos)
+    # Add pagination functionality to allow scaling up number of tasks.
+    page = request.args.get("page", 1, type=int)
+    tasks = current_user.followed_tasks().paginate(
+        page=page,
+        per_page=app.config["TASKS_PER_PAGE"],
+        error_out=False,
+    )
+
+    next_url = url_for("index", page=tasks.next_num) if tasks.has_next else None
+    prev_url = url_for("index", page=tasks.prev_num) if tasks.has_prev else None
+
+    return render_template("index.html", title="Home Page", form=form, tasks=tasks.items, next_url=next_url,
+                           prev_url=prev_url)
+
+
+@app.route("/explore")
+@login_required
+def explore():
+    page = request.args.get("page", 1, type=int)
+    tasks = Task.query.order_by(Task.timestamp.desc()).paginate(
+        page=page,
+        per_page=app.config["TASKS_PER_PAGE"],
+        error_out=False,
+    )
+    next_url = url_for("index", page=tasks.next_num) if tasks.has_next else None
+    prev_url = url_for("index", page=tasks.prev_num) if tasks.has_prev else None
+
+    return render_template("index.html", title="Explore", tasks=tasks.items, next_url=next_url,
+                           prev_url=prev_url)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -87,12 +115,21 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
+    page = request.args.get("page", 1, type=int)
+    tasks = user.own_tasks().paginate(
+        page=page,
+        per_page=app.config["TASKS_PER_PAGE"],
+        error_out=False,
+    )
+    next_url = url_for("index", page=tasks.next_url) if tasks.has_next else None
+    prev_url = url_for("index", page=tasks.prev_url) if tasks.has_prev else None
     form = EmptyForm()
-    tasks = [
-        {"author": user, "body": "Test task #1"},
-        {"author": user, "body": "Test task #2"},
-    ]
-    return render_template("user.html", user=user, tasks=tasks, form=form)
+    return render_template("user.html",
+                           user=user,
+                           tasks=tasks.items,
+                           prev_url=prev_url,
+                           next_url=next_url,
+                           form=form)
 
 
 @app.route("/edit_profile", methods=["GET", "POST"])
@@ -155,3 +192,15 @@ def unfollow(username):
         return redirect(url_for("user", username=username))
     else:
         return redirect(url_for("index"))
+
+
+@app.route("reset_password_request", methods=["GET", "POST"])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)

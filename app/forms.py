@@ -5,6 +5,16 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Le
 from app.models import User
 
 
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    submit = SubmitField("Submit")
+
+class TaskForm(FlaskForm):
+    task = TextAreaField("Add new task...", validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField("Submit")
+
+
 class EmptyForm(FlaskForm):
     submit = SubmitField("Submit")
 

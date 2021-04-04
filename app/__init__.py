@@ -6,6 +6,7 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_mail import Mail
 
 from flask import Flask
 from config import Config
@@ -19,6 +20,7 @@ app.config.from_object(Config)
 # Using extensions, define a database, a migration tool, and a login manager.
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+mail = Mail(app)
 login = LoginManager(app)
 login.login_view = "login"
 
@@ -54,4 +56,4 @@ if not app.debug:
     app.logger.addHandler(file_handler)
     app.logger.setLevel(logging.INFO)
     app.logger.info("Microblog starting up")
-    
+
