@@ -66,7 +66,7 @@ class UserModelCase(unittest.TestCase):
         db.session.commit()
 
         self.assertEqual(u1.own_tasks().count(), len(tasks))
-        self.assertEqual(u1.own_tasks().first().body, "task-0")
+        self.assertEqual(u1.own_tasks().first().body, "task-4")
 
 
     def test_follow_tasks(self):
@@ -102,9 +102,9 @@ class UserModelCase(unittest.TestCase):
         f2 = u2.followed_tasks().all()
         f3 = u3.followed_tasks().all()
         f4 = u4.followed_tasks().all()
-        self.assertEqual(f1, [t1, t4, t2])
-        self.assertEqual(f2, [t3, t2])
-        self.assertEqual(f3, [t4, t3])
+        self.assertEqual(f1, [t2, t4, t1])
+        self.assertEqual(f2, [t2, t3])
+        self.assertEqual(f3, [t3, t4])
         self.assertEqual(f4, [t4])
 
 
