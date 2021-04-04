@@ -1,0 +1,9 @@
+<table>
+    <tr valign="top">
+        {% if task.done %}
+        <td class="done">{{ task.body }}</td>
+        {% else %}
+        <td class="active">{{ task.body }}</td>
+        {% endif %}
+    </tr>
+</table>
