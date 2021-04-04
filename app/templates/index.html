@@ -1,30 +1,29 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block content %}
+{% block app_content %}
     <h1> To-do list for {{ current_user.username }}</h1>
     {% for task in tasks %}
         {% include "_task.html" %}
     {% endfor %}
-    {% if prev_url %}
-        <a href="{{ prev_url }}">Newer tasks</a>
-    {% endif %}
-    {% if next_url %}
-        <a href="{{ next_url }}">Older tasks</a>
-    {% endif %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Newer tasks
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    Older tasks <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <!-- This will include the form to create a task if on the index page.
          The explore page does not have it. -->
     {% if form %}
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.task.label }} <br>
-                {{ form.task(cols=32, rows=4) }} <br>
-                {% for error in form.task.errors %}
-                    <span style="color: red;"> [{{ error }}]</span>
-                {% endfor %}
-                {{ form.submit }}
-            </p>
-        </form>
+        {{ wtf.quick_form(form) }}
     {% endif %}
 
 {% endblock %}

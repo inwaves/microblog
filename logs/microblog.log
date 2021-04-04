@@ -35,3 +35,42 @@ Traceback (most recent call last):
 jinja2.exceptions.UndefinedError: 'app.forms.ResetPasswordForm object' has no attribute 'password2'
 2021-04-04 22:39:05,132 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
 2021-04-04 22:40:15,407 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
+2021-04-04 23:05:07,555 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:62]
+2021-04-04 23:05:10,459 ERROR:         Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/inwaves/inwaves-repository/microblog/app/routes.py", line 44, in index
+    return render_template("index.html", title="Home Page", form=form, tasks=tasks.items, next_url=next_url,
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 61, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+2021-04-04 23:05:49,333 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:62]

@@ -68,7 +68,7 @@ class User(UserMixin, db.Model):
             .join(followers, (followers.c.followed_id == Task.user_id)) \
             .filter(followers.c.follower_id == self.id)
 
-        # Should display the user's own posts in the feed.
+        # Should display the user's own tasks in the feed.
         own = Task.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Task.timestamp.desc())
 
