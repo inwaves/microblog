@@ -5,6 +5,10 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Le
 from app.models import User
 
 
+class EmptyForm(FlaskForm):
+    submit = SubmitField("Submit")
+
+
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
@@ -52,7 +56,7 @@ class EditProfileForm(FlaskForm):
         Allow user to keep existing username on submit."""
         if username.data != self.original_username:
             user = User.query.filter_by(username=username.data).first()
-            
+
             # If there is a duplicate...
             if user is not None:
                 raise ValidationError("Please use a different username.")

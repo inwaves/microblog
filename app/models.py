@@ -5,10 +5,20 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db, login
 
+# An association table that helps model a many-to-many relationship
+# between a user's followers and "followeds".
+followers = db.Table(
+    "followers",
+    db.Column("follower_id", db.Integer, db.ForeignKey("user.id")),
+    db.Column("followed_id", db.Integer, db.ForeignKey("user.id")),
+)
+
+
 @login.user_loader
 def load_user(id):
     """Given an ID, load a user from the database for flask_login."""
     return User.query.get(int(id))
+
 
 # Multiple inheritance to fit the flask_login requirements.
 class User(UserMixin, db.Model):
@@ -16,9 +26,17 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    tasks = db.relationship("Task", backref="author", lazy="dynamic")
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    tasks = db.relationship("Task", backref="author", lazy="dynamic")
+    followed = db.relationship(
+        "User",
+        secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref("followers", lazy="dynamic"),
+        lazy="dynamic",
+    )
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode("utf-8")).hexdigest()
@@ -32,8 +50,29 @@ class User(UserMixin, db.Model):
         """Check that the supplied password's hash matches internal hash for user."""
         return check_password_hash(self.password_hash, password)
 
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        return self.followed.filter(followers.c.followed_id == user.id).count() > 0
+
+    def followed_tasks(self):
+        followed = Task.query \
+            .join(followers, (followers.c.followed_id == Task.user_id)) \
+            .filter(followers.c.follower_id == self.id)
+
+        # Should display the user's own posts in the feed.
+        own = Task.query.filter_by(user_id=self.id)
+        return followed.union(own).order_by(Task.timestamp)
+
     def __repr__(self) -> str:
         return f"<User {self.username}>"
+
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
