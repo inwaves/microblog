@@ -9,7 +9,7 @@
                 <a href="{{ url_for('user', username=task.author.username) }}">
                     {{ task.author.username }}
                 </a>
-                says:
+                added {{ moment(task.timestamp).fromNow() }}
                 <br>
                 {{ task.body }}
             </td>

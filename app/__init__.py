@@ -3,11 +3,13 @@ import logging
 
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
+# Flask extensions.
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 
 from flask import Flask
 from config import Config
@@ -24,6 +26,7 @@ mail = Mail(app)
 login = LoginManager(app)
 login.login_view = "login"
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 # Add import after app is initialised to avoid circular import.
 from app import routes, models, errors
