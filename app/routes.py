@@ -97,7 +97,7 @@ def user(username):
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)
     
     # When accessing this route via method POST, you're submitting the form.
     if form.validate_on_submit():
