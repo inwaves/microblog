@@ -1,17 +1,17 @@
 <table class="table table-hover">
-        <tr>
-            <td width="70px">
-                <a href="{{ url_for('user', username=task.author.username) }}">
-                    <img src="{{ task.author.avatar(70) }}" />
-                </a>
-            </td>
-            <td>
-                <a href="{{ url_for('user', username=task.author.username) }}">
-                    {{ task.author.username }}
-                </a>
-                added {{ moment(task.timestamp).fromNow() }}
-                <br>
-                {{ task.body }}
-            </td>
-        </tr>
-    </table>
+    <tr>
+        <td width="70px">
+            <a href="{{ url_for('main.user', username=task.author.username) }}">
+                <img src="{{ task.author.avatar(70) }}"/>
+            </a>
+        </td>
+        <td>
+            <a href="{{ url_for('main.user', username=task.author.username) }}">
+                {{ task.author.username }}
+            </a>
+            added {{ moment(task.timestamp).fromNow() }}
+            <br>
+            {{ task.body }}
+        </td>
+    </tr>
+</table>
