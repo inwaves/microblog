@@ -39,7 +39,8 @@ def create_app(config_class=Config):
 
     if app.config["ELASTICSEARCH_URL"]:
         app.elasticsearch = Elasticsearch([app.config["ELASTICSEARCH_URL"]])
-        app.elasticsearch.indices.create("task")
+        if not app.elasticsearch.indices.exists("task"):
+            app.elasticsearch.indices.create("task")
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
