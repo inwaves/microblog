@@ -13,12 +13,8 @@
 
 {% block title %}
     {% if title %}
-        <title>
             To-do list for {{ current_user.username }}
-        </title>
     {% else %}
-        <title>
-            To-do list
         </title>
     {% endif %}
 {% endblock %}
