@@ -1,4 +1,4 @@
-2021-04-04 15:15:06,387 ERROR:         Exception on /user/Andrei1 [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
+2021-04-04 23:14:59,169 ERROR:         Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,71 +14,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/microblog/app/routes.py", line 101, in user
-    return render_template("user.html", user=user, tasks=tasks, form=form)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 138, in render_template
-    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 930, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 883, in get_template
-    return self._load_template(name, self.make_globals(globals))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 857, in _load_template
-    template = self.loader.load(self, name, globals)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/loaders.py", line 127, in load
-    code = environment.compile(source, name, filename)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 638, in compile
-    self.handle_exception(source=source_hint)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/user.html", line 24, in template
-    <form action="{{ url_for('follow', username=user.username }}" method="post">
-jinja2.exceptions.TemplateSyntaxError: unexpected '}', expected ')'
-2021-04-04 15:15:48,741 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 15:17:33,915 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 15:18:10,742 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 15:18:39,853 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 15:19:27,627 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 16:31:12,482 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 16:31:18,753 ERROR:         Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/microblog/app/routes.py", line 34, in index
-    per_page=app.config["POSTS_PER_PAGE"]
-KeyError: 'POSTS_PER_PAGE'
-2021-04-04 16:32:00,032 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 16:32:02,475 ERROR:         Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/microblog/app/routes.py", line 37, in index
-    return render_template("index.html", title="Home Page", form=form, tasks=tasks)
+  File "/Users/inwaves/inwaves-repository/microblog/app/routes.py", line 44, in index
+    return render_template("index.html", title="Home Page", form=form, tasks=tasks.items, next_url=next_url,
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
     return _render(
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
@@ -89,24 +26,80 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 43, in top-level template code
-    {% block content %}{% endblock %}
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 5, in block "content"
-    {% for task in tasks %}
-TypeError: 'Pagination' object is not iterable
-2021-04-04 16:35:21,930 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 16:35:25,086 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 16:45:58,054 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 16:46:42,627 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:56]
-2021-04-04 17:31:28,322 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 17:33:43,745 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:01:24,630 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:01:58,968 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:03:05,161 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:03:34,847 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:03:44,914 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:04:08,981 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:05:37,335 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
-2021-04-04 22:05:49,660 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:58]
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 2, in top-level template code
+    {% import "bootstrap/wtf.html" as wtf %}
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 6, in top-level template code
+    {% extends "bootstrap/base.html" %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 66, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 7, in block "app_content"
+    {% include "_task.html" %}
+  File "/Users/inwaves/inwaves-repository/microblog/app/templates/_task.html", line 12, in top-level template code
+    added {{ moment(Task.timestamp).fromNow() }}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'post' is undefined
+2021-04-04 23:15:12,458 INFO:         Microblog starting up [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:65]
+2021-04-05 09:30:46,134 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:74]
+2021-04-05 09:30:49,069 ERROR: Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/inwaves/inwaves-repository/microblog/app/main/routes.py", line 39, in index
+    page, current_app.config['tasks_PER_PAGE'], False)
+KeyError: 'tasks_PER_PAGE'
+2021-04-05 09:33:17,155 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:74]
+2021-04-05 09:33:41,919 ERROR: Exception on /index [POST] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/inwaves/inwaves-repository/microblog/app/main/routes.py", line 31, in index
+    task = Task(body=form.task.data, author=current_user,
+  File "<string>", line 4, in __init__
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 437, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 434, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/sqlalchemy/orm/decl_base.py", line 1129, in _declarative_constructor
+    raise TypeError(
+TypeError: 'language' is an invalid keyword argument for Task
+2021-04-05 09:34:53,094 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:74]
+2021-04-05 09:34:57,036 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:74]
+2021-04-05 09:35:13,616 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:74]
+2021-04-05 16:42:03,690 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:80]
