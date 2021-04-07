@@ -78,6 +78,14 @@ def user(username):
                            next_url=next_url, prev_url=prev_url, form=form)
 
 
+@bp.route("/user/<username>/popup")
+@login_required
+def user_popup(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    form = EmptyForm()
+    return render_template("user_popup.html", user=user, form=form)
+
+
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -142,6 +150,7 @@ def translate_text():
                                       request.form['source_language'],
                                       request.form['dest_language'])})
 
+
 @bp.route("/search")
 @login_required
 def search():
@@ -149,8 +158,8 @@ def search():
         return redirect(url_for("main.explore"))
     page = request.args.get("page", 1, type=int)
     tasks, total = Task.search(g.search_form.query.data, page, current_app.config["TASKS_PER_PAGE"])
-    next_url = url_for("main.search", q=g.search_form.query.data, page = page + 1) \
-            if total > page * current_app.config["TASKS_PER_PAGE"] else None
+    next_url = url_for("main.search", q=g.search_form.query.data, page=page + 1) \
+        if total > page * current_app.config["TASKS_PER_PAGE"] else None
     prev_url = url_for("main.search", q=g.search_form.query.data, page=page - 1) \
         if page > 1 else None
     return render_template("search.html", title=_("Search"), tasks=tasks, next_url=next_url, prev_url=prev_url)

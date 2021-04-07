@@ -3,17 +3,80 @@
      UI across pages that have different functions.
 -->
 
+<script></script>
+
 {% extends "bootstrap/base.html" %}
+
 
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
+    <script>
+        function translate(sourceElem, destElem, sourceLang, destLang) {
+            $(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
+            $.post('/translate', {
+                text: $(sourceElem).text(),
+                source_language: sourceLang,
+                dest_language: destLang
+            }).done(function (response) {
+                $(destElem).text(response['text'])
+            }).fail(function () {
+                $(destElem).text("{{ _('Error: Could not contact server.') }}");
+            });
+        }
+
+        $(function () {
+            var timer = null;
+            $(".user_popup").hover(
+                function (event) {
+                    // Mouse-in event handler.
+                    var elem = $(event.currentTarget);
+                    timer = setTimeout(function () {
+                        timer = null;
+                        xhr = $.ajax(
+                            '/user/' + elem.first().text().trim() + '/popup').done(
+                                function(data){
+                                    // Create and display the popup here.
+                                    xhr = null;
+                                    elem.popover({
+                                        trigger: 'manual',
+                                        html: true,
+                                        animation: false,
+                                        container: elem,
+                                        content: data
+                                    }).popover('show');
+                                    flask_moment_render_all();
+                                });
+                    }, 1000);
+                },
+                function (event) {
+                    // Mouse-out event handler.
+                    var elem = $(event.currentTarget);
+                    if (timer) {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                    else if (xhr) {
+                        xhr.abort();
+                        xhr = null;
+                    }
+                    else {
+                        // Destroy the popup here
+                        elem.popover('destroy');
+                    }
+                }
+            )
+        });
+    </script>
+
+
 {% endblock %}
 
 
 {% block title %}
     {% if title %}
-            To-do list for {{ current_user.username }}
+        To-do list for {{ current_user.username }}
     {% else %}
         </title>
     {% endif %}

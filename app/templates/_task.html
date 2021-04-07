@@ -6,10 +6,14 @@
             </a>
         </td>
         <td>
+            {% set user_link %}
+            <span class="user_popup">
             <a href="{{ url_for('main.user', username=task.author.username) }}">
                 {{ task.author.username }}
             </a>
-            added {{ moment(task.timestamp).fromNow() }}
+            </span>
+            {% endset %}
+            {{ user_link }} added {{ moment(task.timestamp).fromNow() }}
             <br>
             {{ task.body }}
         </td>
