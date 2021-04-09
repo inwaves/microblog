@@ -1,4 +1,4 @@
-2021-04-07 22:48:21,198 ERROR: Exception on /user/Andrei/popup [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
+2021-04-09 23:04:32,558 ERROR: Exception on /messages [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,30 +14,37 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 86, in user_popup
-    return render_template("user_popup.html", user=user, form=form)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 138, in render_template
-    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 930, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 883, in get_template
-    return self._load_template(name, self.make_globals(globals))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 857, in _load_template
-    template = self.loader.load(self, name, globals)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/loaders.py", line 127, in load
-    code = environment.compile(source, name, filename)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 638, in compile
-    self.handle_exception(source=source_hint)
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 202, in messages
+    return render_template("messages.html", messages=messages.items, next_url=next_url, prev_url=prev_url)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 832, in handle_exception
     reraise(*rewrite_traceback_stack(source=source))
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user_popup.html", line 13, in template
-    {{ _('%(count)d following', count=user.followed.count()) }
-jinja2.exceptions.TemplateSyntaxError: unexpected '}'
-2021-04-07 22:49:38,087 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-07 22:59:32,984 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-07 22:59:35,609 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-08 10:23:49,271 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-08 10:45:17,210 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-08 10:45:27,130 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/messages.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 8, in top-level template code
+    {% extends "bootstrap/base.html" %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 170, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/messages.html", line 6, in block "app_content"
+    {% include '_task.html' %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/_task.html", line 4, in top-level template code
+    <a href="{{ url_for('main.user', username=task.author.username) }}">
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'task' is undefined
+2021-04-09 23:06:17,308 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]

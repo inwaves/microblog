@@ -114,13 +114,13 @@ class User(UserMixin, db.Model):
                                     backref="author", lazy="dynamic")
 
     messages_received = db.relationship("Message",
-                                        foreign_keys="Message.receiver_id",
+                                        foreign_keys="Message.recipient_id",
                                         backref="recipient", lazy="dynamic")
 
     last_message_read_time = db.Column(db.DateTime)
     notifications = db.relationship("Notification", backref="user", lazy="dynamic")
 
-    def new_message(self):
+    def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
         return Message.query.filter_by(recipient=self).filter(
             Message.timestamp > last_read_time).count()

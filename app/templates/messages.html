@@ -2,7 +2,7 @@
 
 {% block app_content %}
     <h1>{{ _('Messages') }}</h1>
-    {% for post in messages %}
+    {% for task in messages %}
         {% include '_task.html' %}
     {% endfor %}
     <nav aria-label="...">
