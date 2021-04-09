@@ -6,7 +6,7 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
 from app.main.forms import EditProfileForm, EmptyForm, TaskForm, SearchForm, MessageForm
-from app.models import User, Task, Message
+from app.models import User, Task, Message, Notification
 from app.translate import translate
 from app.main import bp
 
@@ -200,3 +200,15 @@ def messages():
     next_url = url_for("main.messages", page=messages.next_num) if messages.has_next else None
     prev_url = url_for("main.messages", page=messages.prev_num) if messages.has_prev else None
     return render_template("messages.html", messages=messages.items, next_url=next_url, prev_url=prev_url)
+
+@bp.route("/notifications")
+@login_required
+def notifications():
+    since = request.args.get("since", 0.0, type=float)
+    notifications = current_user.notifications.filter(
+        Notification.timestamp > since).order_by(Notification.timestamp.asc())
+    return jsonify([{
+        "name": n.name,
+        "data": n.get_data(),
+        "timestamp": n.timestamp
+    } for n in notifications])
