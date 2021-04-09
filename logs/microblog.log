@@ -1,48 +1,4 @@
-2021-04-06 00:07:28,451 ERROR: Exception on / [POST] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
-    conn = connection.create_connection(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
-    raise err
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/connection/http_urllib3.py", line 245, in perform_request
-    response = self.pool.urlopen(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
-    retries = retries.increment(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/util/retry.py", line 506, in increment
-    raise six.reraise(type(error), error, _stacktrace)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/packages/six.py", line 735, in reraise
-    raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
-    httplib_response = self._make_request(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
-    conn.request(method, url, **httplib_request_kw)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
-    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/http/client.py", line 1255, in request
-    self._send_request(method, url, body, headers, encode_chunked)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/http/client.py", line 1301, in _send_request
-    self.endheaders(body, encode_chunked=encode_chunked)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/http/client.py", line 1250, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/http/client.py", line 1010, in _send_output
-    self.send(msg)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/http/client.py", line 950, in send
-    self.connect()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
-    conn = self._new_conn()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
-    raise NewConnectionError(
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7ff65007b310>: Failed to establish a new connection: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
+2021-04-07 22:48:21,198 ERROR: Exception on /user/Andrei/popup [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -58,29 +14,30 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 35, in index
-    db.session.commit()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/scoping.py", line 163, in do
-    return getattr(self.registry(), name)(*args, **kwargs)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1046, in commit
-    self.transaction.commit()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 511, in commit
-    self.session.dispatch.after_commit(self.session)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/event/attr.py", line 261, in __call__
-    fn(*args, **kw)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/models.py", line 38, in after_commit
-    add_to_index(obj.__tablename__, obj)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/search.py", line 10, in add_to_index
-    current_app.elasticsearch.index(index=index, id=model.id, body=payload)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
-    return func(*args, params=params, headers=headers, **kwargs)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/client/__init__.py", line 398, in index
-    return self.transport.perform_request(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/transport.py", line 390, in perform_request
-    raise e
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/transport.py", line 358, in perform_request
-    status, headers_response, data = connection.perform_request(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/connection/http_urllib3.py", line 258, in perform_request
-    raise ConnectionError("N/A", str(e), e)
-elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7ff65007b310>: Failed to establish a new connection: [Errno 61] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7ff65007b310>: Failed to establish a new connection: [Errno 61] Connection refused)
-2021-04-06 00:09:04,285 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:85]
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 86, in user_popup
+    return render_template("user_popup.html", user=user, form=form)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 138, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 930, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user_popup.html", line 13, in template
+    {{ _('%(count)d following', count=user.followed.count()) }
+jinja2.exceptions.TemplateSyntaxError: unexpected '}'
+2021-04-07 22:49:38,087 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-07 22:59:32,984 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-07 22:59:35,609 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-08 10:23:49,271 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-08 10:45:17,210 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-08 10:45:27,130 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]

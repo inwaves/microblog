@@ -1,4 +1,4 @@
-2021-04-06 00:04:16,375 ERROR: Exception on / [POST] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
+2021-04-06 00:07:28,451 ERROR: Exception on / [POST] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
     conn = connection.create_connection(
@@ -39,7 +39,7 @@ Traceback (most recent call last):
     conn = self._new_conn()
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
     raise NewConnectionError(
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fca6060f190>: Failed to establish a new connection: [Errno 61] Connection refused
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7ff65007b310>: Failed to establish a new connection: [Errno 61] Connection refused
 
 During handling of the above exception, another exception occurred:
 
@@ -82,5 +82,6 @@ Traceback (most recent call last):
     status, headers_response, data = connection.perform_request(
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/elasticsearch/connection/http_urllib3.py", line 258, in perform_request
     raise ConnectionError("N/A", str(e), e)
-elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7fca6060f190>: Failed to establish a new connection: [Errno 61] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7fca6060f190>: Failed to establish a new connection: [Errno 61] Connection refused)
-2021-04-06 00:05:17,269 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:85]
+elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7ff65007b310>: Failed to establish a new connection: [Errno 61] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7ff65007b310>: Failed to establish a new connection: [Errno 61] Connection refused)
+2021-04-06 00:09:04,285 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:85]
+2021-04-07 22:42:53,037 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
