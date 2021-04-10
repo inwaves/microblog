@@ -14,6 +14,10 @@
     {{ moment.lang(g.locale) }}
     <script>
 
+        function set_job_progress(job_id, progress) {
+            $("#" + job_id + "-progress").text(progress)
+        }
+
         {% if current_user.is_authenticated %}
             $(function () {
                 var since = 0;
@@ -27,8 +31,14 @@
                         // the notifications route in main
                         function (notifications) {
                             for (var i = 0; i < notifications.length; i++) {
-                                if (notifications[i].name == "unread_messages_count")
-                                    set_message_count(notifications[i].data);
+                                switch (notifications[i].name) {
+                                    case "unread_message_count":
+                                        set_message_count(notifications[i].data);
+                                        break;
+                                    case "job_progress":
+                                        set_job_progress(notifications[i].data.job_id, notifications[i].data.progress);
+                                        break;
+                                }
                                 since = notifications[i].timestamp;
                             }
                         }
@@ -160,6 +170,21 @@
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+        {% if current_user.is_authenticated %}
+            {% with jobs = current_user.get_jobs_in_progress() %}
+                {% if jobs %}
+                    {% for job in jobs %}
+                        <div class="alert alert-success" role="alert">
+                            {{ job.description }}
+                            <span id="{{ job.id }}-progress">{{ job.get_progress() }}</span>%
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    </div>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}

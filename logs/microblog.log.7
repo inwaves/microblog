@@ -1,94 +1,117 @@
-2021-04-05 16:42:06,455 ERROR: Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
+2021-04-07 22:43:01,934 ERROR: Exception on /auth/login [POST] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/microblog/app/main/routes.py", line 45, in index
-    return render_template('index.html', title=_('Home'), form=form,
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
-    return _render(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 2, in top-level template code
-    {% import "bootstrap/wtf.html" as wtf %}
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 6, in top-level template code
-    {% extends "bootstrap/base.html" %}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
-    {%- block html %}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
-    {% block body -%}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
-    {% block navbar %}
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 49, in block "navbar"
-    {{ g.search_form.q(size=20, class='form-control',
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'app.main.forms.SearchForm object' has no attribute 'q'
-2021-04-05 16:42:24,975 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:80]
-2021-04-05 16:42:26,074 ERROR: Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py:1891]
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 609, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: user
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1952, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1821, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/_compat.py", line 39, in reraise
     raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/microblog/app/main/routes.py", line 45, in index
-    return render_template('index.html', title=_('Home'), form=form,
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
-    return _render(
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/index.html", line 2, in top-level template code
-    {% import "bootstrap/wtf.html" as wtf %}
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 6, in top-level template code
-    {% extends "bootstrap/base.html" %}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
-    {%- block html %}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
-    {% block body -%}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
-    {% block navbar %}
-  File "/Users/inwaves/inwaves-repository/microblog/app/templates/base.html", line 49, in block "navbar"
-    {{ g.search_form.query(size=20, class='form-control',
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'app.main.forms.SearchForm object' has no attribute 'q'
-2021-04-05 16:42:54,451 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:80]
-2021-04-05 16:45:33,459 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/microblog/app/__init__.py:80]
-2021-04-06 00:03:57,357 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:85]
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/auth/routes.py", line 19, in login
+    user = User.query.filter_by(username=form.username.data).first()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3429, in first
+    ret = list(self[0:1])
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3203, in __getitem__
+    return list(res)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3535, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3560, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 609, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Andrei', 1, 0)]
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+2021-04-07 22:44:33,501 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-07 22:44:38,990 ERROR: Exception on /auth/login [POST] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 609, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: user
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/auth/routes.py", line 19, in login
+    user = User.query.filter_by(username=form.username.data).first()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3429, in first
+    ret = list(self[0:1])
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3203, in __getitem__
+    return list(res)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3535, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3560, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 609, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Andrei', 1, 0)]
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+2021-04-07 22:45:28,220 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-07 22:45:35,193 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-07 22:47:57,921 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+2021-04-07 22:48:17,464 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]

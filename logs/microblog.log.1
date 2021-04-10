@@ -1,44 +1,4 @@
-2021-04-09 23:01:48,417 ERROR: Exception on /favicon.ico [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1948, in full_dispatch_request
-    rv = self.preprocess_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2242, in preprocess_request
-    rv = func()
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 16, in before_request
-    if current_user.is_authenticated:
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/werkzeug/local.py", line 347, in __getattr__
-    return getattr(self._get_current_object(), name)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/werkzeug/local.py", line 306, in _get_current_object
-    return self.__local()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 26, in <lambda>
-    current_user = LocalProxy(lambda: _get_user())
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 346, in _get_user
-    current_app.login_manager._load_user()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/login_manager.py", line 318, in _load_user
-    user = self._user_callback(user_id)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/models.py", line 193, in load_user
-    return User.query.get(int(id))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_sqlalchemy/__init__.py", line 512, in __get__
-    mapper = orm.class_mapper(type)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/base.py", line 451, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/base.py", line 430, in _inspect_mapped_class
-    mapper._configure_all()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/mapper.py", line 1352, in _configure_all
-    configure_mappers()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/mapper.py", line 3295, in configure_mappers
-    raise e
-sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'mapped class User->user'. Original exception was: Class <class 'app.models.Message'> does not have a mapped column named 'receiver_id'
-2021-04-09 23:02:39,740 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-09 23:02:45,027 ERROR: Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
+2021-04-10 15:03:41,413 ERROR: Exception on /user/Andrei [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -54,8 +14,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 45, in index
-    return render_template('index.html', title=_('Home'), form=form,
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 79, in user
+    return render_template('user.html', user=user, tasks=tasks.items,
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 137, in render_template
     return _render(
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 120, in _render
@@ -66,8 +26,8 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/index.html", line 2, in top-level template code
-    {% import "bootstrap/wtf.html" as wtf %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
   File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 8, in top-level template code
     {% extends "bootstrap/base.html" %}
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
@@ -76,9 +36,105 @@ Traceback (most recent call last):
     {%- block html %}
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
     {% block body -%}
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
-    {% block navbar %}
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 147, in block "navbar"
-    {% set new_messages = current_user.new_messages() %}
-jinja2.exceptions.UndefinedError: 'app.models.User object' has no attribute 'new_messages'
-2021-04-09 23:03:37,101 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 170, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user.html", line 33, in block "app_content"
+    <a href="{{ url_for('main.export_tasks') }}">
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/helpers.py", line 357, in url_for
+    rv = url_adapter.build(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/werkzeug/routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'main.export_tasks'. Did you mean 'main.export_posts' instead?
+2021-04-10 15:05:04,364 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:05:11,175 INFO: Microblog startup [in ./app/__init__.py:92]
+2021-04-10 15:05:16,243 ERROR: Unhandled exception [in ./app/jobs.py:52]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 856, in sendmail
+    self.ehlo_or_helo_if_needed()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 604, in ehlo_or_helo_if_needed
+    if not (200 <= self.ehlo()[0] <= 299):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 444, in ehlo
+    self.putcmd(self.ehlo_msg, name or self.local_hostname)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 371, in putcmd
+    self.send(str)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 363, in send
+    raise SMTPServerDisconnected('please run connect() first')
+smtplib.SMTPServerDisconnected: please run connect() first
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./app/jobs.py", line 44, in export_tasks
+    send_email("[Microtasks] Your tasks", sender=app.config["ADMINS"][0],
+  File "./app/mail_framework.py", line 23, in send_email
+    mail.send(msg)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 152, in __exit__
+    self.host.quit()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 988, in quit
+    res = self.docmd("quit")
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 424, in docmd
+    self.putcmd(cmd, args)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 371, in putcmd
+    self.send(str)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 363, in send
+    raise SMTPServerDisconnected('please run connect() first')
+smtplib.SMTPServerDisconnected: please run connect() first
+2021-04-10 15:21:09,578 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:21:17,061 INFO: Microblog startup [in ./app/__init__.py:92]
+2021-04-10 15:21:22,124 ERROR: Unhandled exception [in ./app/jobs.py:52]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 856, in sendmail
+    self.ehlo_or_helo_if_needed()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 604, in ehlo_or_helo_if_needed
+    if not (200 <= self.ehlo()[0] <= 299):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 444, in ehlo
+    self.putcmd(self.ehlo_msg, name or self.local_hostname)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 371, in putcmd
+    self.send(str)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 363, in send
+    raise SMTPServerDisconnected('please run connect() first')
+smtplib.SMTPServerDisconnected: please run connect() first
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./app/jobs.py", line 44, in export_tasks
+    send_email("[Microtasks] Your tasks", sender=app.config["ADMINS"][0],
+  File "./app/mail_framework.py", line 23, in send_email
+    mail.send(msg)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_mail.py", line 152, in __exit__
+    self.host.quit()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 988, in quit
+    res = self.docmd("quit")
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 424, in docmd
+    self.putcmd(cmd, args)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 371, in putcmd
+    self.send(str)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/smtplib.py", line 363, in send
+    raise SMTPServerDisconnected('please run connect() first')
+smtplib.SMTPServerDisconnected: please run connect() first
+2021-04-10 15:21:46,000 INFO: Microblog startup [in ./app/__init__.py:92]

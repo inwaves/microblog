@@ -1,15 +1,17 @@
-import jwt
 import json
-
 from datetime import datetime
 from hashlib import md5
 from time import time
 
-from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
+import redis
+import rq
 from flask import current_app
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import db, login
-from app.search import add_to_index, remove_from_index, query_index
+from app.search import add_to_index, query_index
 
 
 class Notification(db.Model):
@@ -44,8 +46,8 @@ class SearchableMixin(object):
         for i in range(len(ids)):
             when.append((ids[i], i))
         return cls.query.filter(cls.id.in_(ids)) \
-                   .order_by(db.case(when, value=cls.id)), \
-               total
+            .order_by(db.case(when, value=cls.id)), \
+            total
 
     @classmethod
     def before_commit(cls, session):
@@ -87,12 +89,13 @@ followers = db.Table(
 
 
 @login.user_loader
-def load_user(id):
+def load_user(_id):
     """Given an ID, load a user from the database for flask_login."""
-    return User.query.get(int(id))
+    return User.query.get(int(_id))
 
 
 # Multiple inheritance to fit the flask_login requirements.
+# noinspection PyArgumentList
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -119,6 +122,7 @@ class User(UserMixin, db.Model):
 
     last_message_read_time = db.Column(db.DateTime)
     notifications = db.relationship("Notification", backref="user", lazy="dynamic")
+    jobs = db.relationship("Job", backref="user", lazy="dynamic")
 
     def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
@@ -171,11 +175,12 @@ class User(UserMixin, db.Model):
     @staticmethod
     def verify_reset_password_token(token):
         """Decode a password given a token and a secret key."""
+        # noinspection PyBroadException
         try:
-            id = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])["reset_password"]
+            _id = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])["reset_password"]
         except:
             return
-        return User.query.get(id)
+        return User.query.get(_id)
 
     def add_notification(self, name, data):
         # Delete the notification if it already exists.
@@ -184,13 +189,25 @@ class User(UserMixin, db.Model):
         db.session.add(n)
         return n
 
+    def launch_job(self, name, description, *args, **kwargs):
+        rq_job = current_app.job_queue.enqueue("app.jobs." + name, self.id, *args, **kwargs)
+        job = Job(id=rq_job.get_id(), name=name, description=description, user=self)
+        db.session.add(job)
+        return job
+
+    def get_jobs_in_progress(self):
+        return Job.query.filter_by(user=self, complete=False).all()
+
+    def get_job_in_progress(self, name):
+        return Job.query.filter_by(user=self, name=name, complete=False).first()
+
     def __repr__(self) -> str:
         return f"<User {self.username}>"
 
 
 @login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(_id):
+    return User.query.get(int(_id))
 
 
 class Task(SearchableMixin, db.Model):
@@ -204,3 +221,22 @@ class Task(SearchableMixin, db.Model):
 
     def __repr__(self) -> str:
         return f"<Task {self.body} written by user {self.user_id}>"
+
+
+class Job(db.Model):
+    id = db.Column(db.String(36), primary_key=True)
+    name = db.Column(db.String(128), index=True)
+    description = db.Column(db.String(128))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    complete = db.Column(db.Boolean, default=False)
+
+    def get_rq_job(self):
+        try:
+            rq_job = rq.job.Job.fetch(self.id, connection=current_app.redis)
+        except (redis.exceptions.RedisError, rq.exceptions.NoSuchJobError):
+            return None
+        return rq_job
+
+    def get_progress(self):
+        job = self.get_rq_job()
+        return job.meta.get("progress", 0) if job is not None else 100

@@ -27,6 +27,15 @@
                 <!-- if the user you're looking at is you... -->
                 {% if user == current_user %}
                     <p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
+
+                {% if not current_user.get_job_in_progress('export_tasks') %}
+                <p>
+                    <a href="{{ url_for('main.export_tasks') }}">
+                        {{ _('Export your tasks') }}
+                    </a>
+                </p>
+                {% endif %}
+
                 {% elif not current_user.is_following(user) %}
                     <p>
                     <form action="{{ url_for('main.follow', username=user.username) }}" method="post">

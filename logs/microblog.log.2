@@ -1,4 +1,11 @@
-2021-04-07 22:48:21,198 ERROR: Exception on /user/Andrei/popup [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
+2021-04-10 14:59:26,331 ERROR: Exception on /user/Andrei [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/base.py", line 406, in _entity_descriptor
+    return getattr(entity, key)
+AttributeError: type object 'Job' has no attribute 'user'
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,83 +21,49 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 86, in user_popup
-    return render_template("user_popup.html", user=user, form=form)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 138, in render_template
-    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 930, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 883, in get_template
-    return self._load_template(name, self.make_globals(globals))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 857, in _load_template
-    template = self.loader.load(self, name, globals)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/loaders.py", line 127, in load
-    code = environment.compile(source, name, filename)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 638, in compile
-    self.handle_exception(source=source_hint)
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 79, in user
+    return render_template('user.html', user=user, tasks=tasks.items,
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/environment.py", line 832, in handle_exception
     reraise(*rewrite_traceback_stack(source=source))
   File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user_popup.html", line 13, in template
-    {{ _('%(count)d following', count=user.followed.count()) }
-jinja2.exceptions.TemplateSyntaxError: unexpected '}'
-2021-04-07 22:49:38,087 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-07 22:59:32,984 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-07 22:59:35,609 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-08 10:23:49,271 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-08 10:45:17,210 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-08 10:45:27,130 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-09 23:01:44,659 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:87]
-2021-04-09 23:01:48,139 ERROR: Exception on / [GET] [in /Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 1948, in full_dispatch_request
-    rv = self.preprocess_request()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask/app.py", line 2242, in preprocess_request
-    rv = func()
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/main/routes.py", line 16, in before_request
-    if current_user.is_authenticated:
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/werkzeug/local.py", line 347, in __getattr__
-    return getattr(self._get_current_object(), name)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/werkzeug/local.py", line 306, in _get_current_object
-    return self.__local()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 26, in <lambda>
-    current_user = LocalProxy(lambda: _get_user())
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/utils.py", line 346, in _get_user
-    current_app.login_manager._load_user()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_login/login_manager.py", line 318, in _load_user
-    user = self._user_callback(user_id)
-  File "/Users/inwaves/inwaves-repository/o.microtasks/app/models.py", line 193, in load_user
-    return User.query.get(int(id))
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_sqlalchemy/__init__.py", line 512, in __get__
-    mapper = orm.class_mapper(type)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/base.py", line 451, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/base.py", line 430, in _inspect_mapped_class
-    mapper._configure_all()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/mapper.py", line 1352, in _configure_all
-    configure_mappers()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/mapper.py", line 3299, in configure_mappers
-    mapper._post_configure_properties()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/mapper.py", line 1965, in _post_configure_properties
-    prop.init()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/interfaces.py", line 197, in init
-    self.do_init()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/relationships.py", line 2077, in do_init
-    self._process_dependent_arguments()
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/relationships.py", line 2106, in _process_dependent_arguments
-    setattr(self, attr, attr_value())
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/ext/declarative/clsregistry.py", line 337, in __call__
-    x = eval(self.arg, globals(), self._dict)
-  File "<string>", line 1, in <module>
-  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/ext/declarative/clsregistry.py", line 220, in __getattr__
-    raise exc.InvalidRequestError(
-sqlalchemy.exc.InvalidRequestError: Class <class 'app.models.Message'> does not have a mapped column named 'receiver_id'
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 8, in top-level template code
+    {% extends "bootstrap/base.html" %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/base.html", line 170, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/templates/user.html", line 31, in block "app_content"
+    {% if not current_user.get_job_in_progress('export_tasks') %}
+  File "/Users/inwaves/inwaves-repository/o.microtasks/app/models.py", line 201, in get_job_in_progress
+    return Job.query.filter_by(user=self, name=name, complete=False).first()
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 1921, in filter_by
+    clauses = [
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 1922, in <listcomp>
+    _entity_descriptor(zero, key) == value
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/orm/base.py", line 408, in _entity_descriptor
+    util.raise_(
+  File "/Users/inwaves/anaconda3/envs/todo-backend/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.models.Job'>' has no property 'user'
+2021-04-10 15:02:57,590 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:03:04,762 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:03:23,337 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:03:29,083 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:03:33,264 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:03:35,222 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
+2021-04-10 15:03:38,110 INFO: Microblog startup [in /Users/inwaves/inwaves-repository/o.microtasks/app/__init__.py:92]
